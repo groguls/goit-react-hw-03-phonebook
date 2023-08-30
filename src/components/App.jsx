@@ -13,14 +13,18 @@ export class App extends Component {
 
   componentDidMount() {
     const savedContacts = localStorage.getItem('ContactsApp');
-    if (savedContacts !== null) {
+    savedContacts !== null &&
       this.setState({ contacts: JSON.parse(savedContacts) });
-    }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
+    if (
+      prevState.contacts !== this.state.contacts &&
+      this.state.contacts.length !== 0
+    ) {
       localStorage.setItem('ContactsApp', JSON.stringify(this.state.contacts));
+    } else if (this.state.contacts.length === 0) {
+      localStorage.removeItem('ContactsApp');
     }
   }
 
