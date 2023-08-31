@@ -18,10 +18,12 @@ export class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts.length === 0) {
+    const { contacts } = this.state;
+
+    if (contacts.length === 0) {
       localStorage.removeItem('ContactsApp');
-    } else if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem('ContactsApp', JSON.stringify(this.state.contacts));
+    } else if (prevState.contacts !== contacts) {
+      localStorage.setItem('ContactsApp', JSON.stringify(contacts));
     }
   }
 
